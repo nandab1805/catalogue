@@ -38,27 +38,27 @@ pipeline {
                 """
             }
         }
-        // stage('Publish Artifact') {
-        //     steps {
-        //         nexusArtifactUploader(
-        //             nexusVersion: 'nexus3',
-        //             protocol: 'http',
-        //             nexusUrl: "${nexusURL}",
-        //             groupId: 'com.roboshop',
-        //             version: "${packageVersion}",
-        //             repository: 'catalogue',
-        //             credentialsId: 'nexus-auth',
-        //             artifacts: [
-        //                 [
-        //                     artifactId: 'catalogue',
-        //                     classifier: '',
-        //                     file: 'catalogue.zip',
-        //                     type: 'zip'
-        //                 ]
-        //             ]
-        //         )
-        //     }
-        // }
+        stage('Publish Artifact') {
+            steps {
+                nexusArtifactUploader(
+                    nexusVersion: 'nexus3',
+                    protocol: 'http',
+                    nexusUrl: "${nexusURL}",
+                    groupId: 'com.roboshop',
+                    version: "${packageVersion}",
+                    repository: 'catalogue',
+                    credentialsId: 'nexus-auth',
+                    artifacts: [
+                        [
+                            artifactId: 'catalogue',
+                            classifier: '',
+                            file: 'catalogue.zip',
+                            type: 'zip'
+                        ]
+                    ]
+                )
+            }
+        }
         stage('Deploy') {
             steps {
                 sh """
